@@ -1,0 +1,22 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Environment variables / local settings
+.env
+
+# macOS system files
+.DS_Store
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
