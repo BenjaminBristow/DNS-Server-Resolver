@@ -24,18 +24,21 @@ def fqdn(name: str) -> str:
 
 def encode_name(name: str) -> bytes:
     """Encode an uncompressed QNAME. Provided as a starting point."""
-    result = bytearray() # initialise result as a bytearray
+    result = bytearray()  # initialise result as a bytearray
 
-    name = name.strip('.') # remove final . if there is one
-    if not name: # if the name is now an empty string then return an empty bytearray
+    name = name.strip('.')  # remove final . if there is one
+    if not name:  # if the name is now an empty string then return an empty bytearray
         return b'\x00'
 
-    sections = name.split('.') # create a list of all sections split on the '.'
+    # create a list of all sections split on the '.'
+    sections = name.split('.')
 
     for section in sections:
-        bytes_section = section.encode('ascii') # turn each section into ascii instead of letters
-        result.append(len(bytes_section)) # get the number of letters and append to result
-        result.extend(bytes_section) # add the letters to the result
+        # turn each section into ascii instead of letters
+        bytes_section = section.encode('ascii')
+        # get the number of letters and append to result
+        result.append(len(bytes_section))
+        result.extend(bytes_section)  # add the letters to the result
 
     result.append(0)
     return bytes(result)
@@ -48,26 +51,32 @@ def decode_name(packet: bytes, offset: int) -> tuple[str, int]:
     """
 
     # byte packet looks like [ 9 199 199 199 2 899 299 299 ...]
-    sections = [] # end up looking like ['www', 'lancaster', 'ac', 'uk']
-    curr = offset # location where we start
+    sections = []  # end up looking like ['www', 'lancaster', 'ac', 'uk']
+    curr = offset  # location where we start
     jumped = False
 
-    while packet[curr] != 0: # \x00 (which is 0) is the end byte so we know when to stop
+    # \x00 (which is 0) is the end byte so we know when to stop
+    while packet[curr] != 0:
 
         # Task 3 - Compression
-        if packet[curr] & 0xC0 == 0xC0: # Check if top two bits are 11 (compression pointer)
-            pointer = packet[curr:curr+2] # Grab 2 bytes for the pointer
-            target_offset = int.from_bytes(pointer, byteorder='big') & 0x3FFF # Convert bytes to int and mask 0x3FFF for target offset
-            jump_name, _ = decode_name(packet, target_offset) # Decode name from target offset
-            sections.extend(jump_name.split('.')) # Split and add jumped labels to sections
-            jumped = True # Mark that a jump occurred
-            break # Pointer marks end of name, exit loop
+        # Check if top two bits are 11 (compression pointer)
+        if packet[curr] & 0xC0 == 0xC0:
+            pointer = packet[curr:curr+2]  # Grab 2 bytes for the pointer
+            # Convert bytes to int and mask 0x3FFF for target offset
+            target_offset = int.from_bytes(pointer, byteorder='big') & 0x3FFF
+            # Decode name from target offset
+            jump_name, _ = decode_name(packet, target_offset)
+            # Split and add jumped labels to sections
+            sections.extend(jump_name.split('.'))
+            jumped = True  # Mark that a jump occurred
+            break  # Pointer marks end of name, exit loop
 
-
-        length = packet[curr] # first digit is length of digits
-        bytes_label = packet[(curr + 1) : (curr + 1 + length)] # read from the one after where we are for the length 
-        sections.append((bytes_label.decode('ascii'))) # decode it and append to sections
-        curr += length + 1 # update where we are now
+        length = packet[curr]  # first digit is length of digits
+        # read from the one after where we are for the length
+        bytes_label = packet[(curr + 1): (curr + 1 + length)]
+        # decode it and append to sections
+        sections.append((bytes_label.decode('ascii')))
+        curr += length + 1  # update where we are now
 
     # loop through sections adding dots between each section
     name = ""
@@ -76,7 +85,7 @@ def decode_name(packet: bytes, offset: int) -> tuple[str, int]:
     name = name.strip('.')
 
     # this is so the computer knows where the byte after this data packet is
-    
+
     next_offset = curr + 2 if jumped else curr + 1
 
     return (name, next_offset)
@@ -92,7 +101,8 @@ def make_query(msg: DNSMessage) -> bytes:
     # 0 = answer count
     # 0 = authority count
     # 0 = additional count   -->> all are 0 as our queries wont have any
-    header = struct.pack("!HHHHHH", msg.ident, msg.flags, len(msg.questions), 0, 0, 0)
+    header = struct.pack("!HHHHHH", msg.ident, msg.flags,
+                         len(msg.questions), 0, 0, 0)
     result.extend(header)
 
     # loop through every question (msg.questions)
@@ -106,14 +116,15 @@ def make_query(msg: DNSMessage) -> bytes:
                 \__________________ header __________________/ \_____ questions + qtype and class _________/
     """
     for question in msg.questions:
-        
-        encoded_name = encode_name(question.fqdn)
+
+        encoded_name = encode_name(question.name)
         result.extend(encoded_name)
-        
-        qtype_qclass = struct.pack("!HH", question.qtype, 1)
+
+        qtype_qclass = struct.pack("!HH", question.type, 1)
         result.extend(qtype_qclass)
 
     return bytes(result)
+
 
 def query_server(msg: DNSMessage, timeout: float, server: str) -> bytes:
     """Send one UDP query to SERVER and return the raw response bytes."""
@@ -122,17 +133,18 @@ def query_server(msg: DNSMessage, timeout: float, server: str) -> bytes:
     response = b'0'  # initialising response
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:  # open udp socket
         for _ in range(attempts):  # loop through number of attempts
-            try: 
+            try:
                 sock.sendto(data, (server, 53))  # send query to server port 53
                 sock.settimeout(timeout)  # set timer limit
                 response, _ = sock.recvfrom(4096)  # grab incoming reply bytes
+                return response
             except:
                 continue  # skip and try again if timeout hits
-                
+
     if response == b'0':  # if still nothing after all tries
         raise socket.timeout  # raise timeout error
     else:
-        return response 
+        return response
 
 
 def query(server: str, name: str, qtype: int, timeout: float, ident: int = -1) -> DNSMessage:
@@ -143,7 +155,7 @@ def query(server: str, name: str, qtype: int, timeout: float, ident: int = -1) -
     if ident == -1:
         ident = random.randrange(0, 65536)
     msg = DNSMessage(ident=ident, flags=0, questions=[
-                     DNSQuestion(fqdn(name), qtype)])
+        DNSQuestion(fqdn(name), qtype)])
 
     response = query_server(msg, timeout, server)
     reply = parse_response(response, msg.ident)
@@ -155,6 +167,7 @@ def query(server: str, name: str, qtype: int, timeout: float, ident: int = -1) -
         raise DNSError(f"DNS server returned error RCODE: {rcode}")
     return reply
 
+
 def parse_response(packet: bytes, expected_id: int):
     """TODO: parse header, question, and all resource-record sections.
 
@@ -162,60 +175,91 @@ def parse_response(packet: bytes, expected_id: int):
     owner names and NS, CNAME, and MX RDATA. Return a useful representation
     containing answer, authority, and additional records. Use the supplied
     DNSMessage, DNSQuestion, and DNSRecord classes from dns_model.py.
+    QTYPE = {"A": 1, "NS": 2, "CNAME": 5, "MX": 15, "TXT": 16}
     """
 
-    # get the first 12 bytes for the header info
-    id, flag, qcount, acount, nscount, arcount = struct.unpack("!HHHHHH", packet[:12])
-    
+    def convert(type, rdlength):
+        rdata = packet[curr+10:curr+10+rdlength]
+        offset = curr + 10
+        if type == 1:  # A - IPv4 Address
+            return ".".join(str(b) for b in rdata)
+        elif type == 2 or type == 5:  # NS - Name Server or  CNAME - Canonical Name
+            domain_name, _ = decode_name(packet, offset)
+            return domain_name
+        elif type == 15:  # MX - Mail Exchange
+            preference = struct.unpack("!H", packet[offset:offset+2])[0]
+            domain_name, _ = decode_name(packet, offset + 2)
+            return (preference, domain_name)
+        elif type == 16:  # TXT
+            offset = 0
+            parts = []
+            while offset < len(rdata):
+                length = rdata[offset]
+                parts.append(rdata[offset+1:offset+1+length].decode('utf-8'))
+                offset += 1 + length
+            string = "".join(parts)
+            return string
+        else:
+            return rdata
+
+            # get the first 12 bytes for the header info
+    id, flag, qcount, acount, nscount, arcount = struct.unpack(
+        "!HHHHHH", packet[:12])
+
     # check if the ID matches what we sent out
     if id != expected_id:
         raise DNSError("Wrong DNS response ID")
 
-    ## task 3.3
+    # task 3.3
     rcode = flag & 0x000F
     if rcode != 0:
         raise DNSError(f"DNS server returned RCODE: {rcode}")
     ##
-    
-    curr = 12 # location of first question
+
+    curr = 12  # location of first question
 
     # lists to store all our parsed objects
-    qobjects, aobjects, nsobjects, arobjects= [], [], [], []
-    
+    qobjects, aobjects, nsobjects, arobjects = [], [], [], []
+
     # loop through and grab all the questions
-    for _ in range(qcount): 
-        qname, curr = decode_name(packet, curr) # unpack qname and location of question after
-        qtype, qclass= struct.unpack("!HH", packet[curr:curr+4])
+    for _ in range(qcount):
+        # unpack qname and location of question after
+        qname, curr = decode_name(packet, curr)
+        qtype, qclass = struct.unpack("!HH", packet[curr:curr+4])
         qobjects.append(DNSQuestion(qname, qtype, qclass))
-        curr += 4 # skip 4 bytes as 2 for QTYPE and 2 for QCLASS
+        curr += 4  # skip 4 bytes as 2 for QTYPE and 2 for QCLASS
 
     # loop through and grab all the answers
-    for _ in range(acount): 
-        aname, curr = decode_name(packet, curr) # unpack name and where it ends
-        atype, aclass, ttl, RDLENGTH = struct.unpack("!HHIH", packet[curr:curr+10])
-        rdata = packet[curr+10:curr+10+RDLENGTH] # grab the rdata bytes using rdlength
+    for _ in range(acount):
+        # unpack name and where it ends
+        aname, curr = decode_name(packet, curr)
+        atype, aclass, ttl, RDLENGTH = struct.unpack(
+            "!HHIH", packet[curr:curr+10])
+        # grab the rdata bytes using rdlength
+        rdata = convert(atype, RDLENGTH)
         aobjects.append(DNSRecord(aname, atype, rdata, aclass, ttl))
-        curr += 10 + RDLENGTH # move past trailer and data
+        curr += 10 + RDLENGTH  # move past trailer and data
 
     # loop through and grab authority records
-    for _ in range(nscount): 
-        nsname, curr = decode_name(packet, curr) 
-        nstype, nsclass, ttl, RDLENGTH = struct.unpack("!HHIH", packet[curr:curr+10])
-        rdata = packet[curr+10:curr+10+RDLENGTH]
+    for _ in range(nscount):
+        nsname, curr = decode_name(packet, curr)
+        nstype, nsclass, ttl, RDLENGTH = struct.unpack(
+            "!HHIH", packet[curr:curr+10])
+        rdata = convert(nstype, RDLENGTH)
         nsobjects.append(DNSRecord(nsname, nstype, rdata, nsclass, ttl))
         curr += 10 + RDLENGTH
 
     # loop through and grab additional records
-    for _ in range(arcount): 
-        arname, curr = decode_name(packet, curr) 
-        artype, arclass, ttl, RDLENGTH = struct.unpack("!HHIH", packet[curr:curr+10])
-        rdata = packet[curr+10:curr+10+RDLENGTH]
+    for _ in range(arcount):
+        arname, curr = decode_name(packet, curr)
+        artype, arclass, ttl, RDLENGTH = struct.unpack(
+            "!HHIH", packet[curr:curr+10])
+        rdata = convert(artype, RDLENGTH)
         arobjects.append(DNSRecord(arname, artype, rdata, arclass, ttl))
         curr += 10 + RDLENGTH
-        
+
     # bundle everything together into the final message object and send it back
     return DNSMessage(id, flag, qobjects, aobjects, nsobjects, arobjects)
-
 
 
 def resolve_iteratively(name: str, qtype: int, root: str, timeout: float = 2.0,
@@ -225,41 +269,61 @@ def resolve_iteratively(name: str, qtype: int, root: str, timeout: float = 2.0,
     Follow referrals using glue A records. Handle timeouts and NXDOMAIN/NODATA responses. Return the list of final answer DNSRecord objects.
     With TRACE, print each query and referral step.
     """
-    tracing = [] # track query steps
-    current_server = root # begin at root server
-    reply = None # init reply variable
-    count = 0
 
-    while reply is None or not reply.answers:
-        reply = query(current_server, name, qtype, timeout)
-        if trace: tracing.append(f"server: {current_server}, name: {name}, qtype: {qtype}")
-        
-        if reply.answers: # stop if we hit answers
-            break
+    servers = [root]
 
-        try:
-            # look through additional records for correct ip
-            ip = None
-            for arobject in reply.additional:
-                if arobject.type == 1:
-                    ip = socket.inet_ntoa(arobject.rdata)
-                    if trace and ip: tracing[count] += f" -> next server: {ip}"
-                    break
-            current_server = ip # update server for next iteration
-            if not ip: raise DNSError("Missing or invalid glue record")
-        except DNSError:
-            raise
-        except:
-            raise DNSError("Failed to resolve next referral IP")
+    for _ in range(15):
+        reply = None
+        last_error = None
 
-        count += 1
+        for server in servers:
+            try:
+                if trace:
+                    print(f"server: {server}, name: {name}, qtype: {qtype}")
+                reply = query(server, name, qtype, timeout)
+                break  # dont need to query back serves if one replies
+            except Exception as e:
+                if "RCODE: 3" in str(e):
+                    raise DNSError("DNS server returned error RCODE: 3")
+                else:
+                    last_error = e
 
-    if trace:
-        # print each step if trace is true
-        for step in tracing:
-            print(step)
+        if reply is None:
+            raise DNSError(
+                f"Servers didn't reply or invalid glue record: {last_error}")
 
-    return reply.answers
+        if reply.answers:
+            return reply.answers
+
+        ns_names = []
+        for record in reply.authority:
+            if record.type == 2:
+                ns_names.append(record.value.rstrip('.').lower())
+
+        if not ns_names:
+            return []
+
+        glue_ips = []
+        for record in reply.additional:
+            if record.type == 1:
+                if record.name.rstrip('.').lower() in ns_names:
+                    glue_ips.append(record.value)
+
+        if glue_ips:
+            servers = glue_ips
+        else:
+            ns_records = resolve_iteratively(
+                ns_names[0], 1, root, timeout, trace)
+            servers = []
+            for record in ns_records:
+                if record.type == 1:
+                    servers.append(record.value)
+            if not servers:
+                raise DNSError(
+                    f"Failed to resolve IP for nameserver {ns_names}")
+        if trace:
+            print(f"Referral -> next server(s): {', '.join(servers)}")
+    raise DNSError("Too many referrals")
 
 
 def main() -> int:

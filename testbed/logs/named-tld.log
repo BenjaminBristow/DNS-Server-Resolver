@@ -1,0 +1,205 @@
+16-Nov-2026 14:41:50.658 general: notice: starting BIND 9.18.49-1~deb12u3-Debian (Extended Support Version) <id:>
+16-Nov-2026 14:41:50.664 general: notice: running on Linux x86_64 6.17.0-1033-oem #33-Ubuntu SMP PREEMPT_DYNAMIC Mon Aug 24 05:45:54 UTC 2026
+16-Nov-2026 14:41:50.664 general: notice: built with  '--build=x86_64-linux-gnu' '--prefix=/usr' '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--sysconfdir=/etc' '--localstatedir=/var' '--disable-option-checking' '--disable-silent-rules' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--runstatedir=/run' '--disable-maintainer-mode' '--disable-dependency-tracking' '--libdir=/usr/lib/x86_64-linux-gnu' '--sysconfdir=/etc/bind' '--with-python=python3' '--localstatedir=/' '--enable-threads' '--enable-largefile' '--with-libtool' '--enable-shared' '--disable-static' '--with-gost=no' '--with-openssl=/usr' '--with-gssapi=yes' '--with-libidn2' '--with-json-c' '--with-lmdb=/usr' '--with-gnu-ld' '--with-maxminddb' '--with-atf=no' '--enable-ipv6' '--enable-rrl' '--enable-filter-aaaa' '--disable-native-pkcs11' '--enable-dnstap' 'build_alias=x86_64-linux-gnu' 'CFLAGS=-g -O2 -ffile-prefix-map=/build/reproducible-path/bind9-9.18.49=. -fstack-protector-strong -Wformat -Werror=format-security -fno-strict-aliasing -fno-delete-null-pointer-checks -DNO_VERSION_DATE -DDIG_SIGCHASE' 'LDFLAGS=-Wl,-z,relro -Wl,-z,now' 'CPPFLAGS=-Wdate-time -D_FORTIFY_SOURCE=2'
+16-Nov-2026 14:41:50.664 general: notice: running as: named -4 -c testbed/named.conf.tld -L testbed/logs/named-tld.log
+16-Nov-2026 14:41:50.664 general: notice: compiled by GCC 12.2.0
+16-Nov-2026 14:41:50.664 general: notice: compiled with OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+16-Nov-2026 14:41:50.664 general: notice: linked to OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+16-Nov-2026 14:41:50.664 general: notice: compiled with libuv version: 1.44.2
+16-Nov-2026 14:41:50.664 general: notice: linked to libuv version: 1.44.2
+16-Nov-2026 14:41:50.664 general: notice: compiled with libxml2 version: 2.9.14
+16-Nov-2026 14:41:50.664 general: notice: linked to libxml2 version: 20914
+16-Nov-2026 14:41:50.664 general: notice: compiled with json-c version: 0.16
+16-Nov-2026 14:41:50.664 general: notice: linked to json-c version: 0.16
+16-Nov-2026 14:41:50.664 general: notice: compiled with zlib version: 1.2.13
+16-Nov-2026 14:41:50.664 general: notice: linked to zlib version: 1.2.13
+16-Nov-2026 14:41:50.664 general: notice: ----------------------------------------------------
+16-Nov-2026 14:41:50.664 general: notice: BIND 9 is maintained by Internet Systems Consortium,
+16-Nov-2026 14:41:50.664 general: notice: Inc. (ISC), a non-profit 501(c)(3) public-benefit 
+16-Nov-2026 14:41:50.664 general: notice: corporation.  Support and training for BIND 9 are 
+16-Nov-2026 14:41:50.664 general: notice: available at https://www.isc.org/support
+16-Nov-2026 14:41:50.664 general: notice: ----------------------------------------------------
+16-Nov-2026 14:41:50.664 general: info: found 14 CPUs, using 14 worker threads
+16-Nov-2026 14:41:50.664 general: info: using 14 UDP listeners per interface
+16-Nov-2026 14:41:50.677 general: notice: DNSSEC algorithms: RSASHA1 NSEC3RSASHA1 RSASHA256 RSASHA512 ECDSAP256SHA256 ECDSAP384SHA384 ED25519 ED448
+16-Nov-2026 14:41:50.677 general: notice: DS algorithms: SHA-1 SHA-256 SHA-384
+16-Nov-2026 14:41:50.677 general: notice: HMAC algorithms: HMAC-MD5 HMAC-SHA1 HMAC-SHA224 HMAC-SHA256 HMAC-SHA384 HMAC-SHA512
+16-Nov-2026 14:41:50.677 general: notice: TKEY mode 2 support (Diffie-Hellman): yes
+16-Nov-2026 14:41:50.677 general: notice: TKEY mode 3 support (GSS-API): yes
+16-Nov-2026 14:41:50.678 general: info: the initial working directory is '/workspace'
+16-Nov-2026 14:41:50.678 general: info: loading configuration from '/workspace/testbed/named.conf.tld'
+16-Nov-2026 14:41:50.681 general: info: the working directory is now '/workspace/testbed'
+16-Nov-2026 14:41:50.682 general: info: reading built-in trust anchors from file '/etc/bind/bind.keys'
+16-Nov-2026 14:41:50.682 general: info: looking for GeoIP2 databases in '/usr/share/GeoIP'
+16-Nov-2026 14:41:50.682 general: info: using default UDP/IPv4 port range: [32768, 60999]
+16-Nov-2026 14:41:50.683 network: info: listening on IPv4 interface tld-eth0, 10.0.1.2#53
+16-Nov-2026 14:41:50.696 general: info: generating session key for dynamic DNS
+16-Nov-2026 14:41:50.696 general: info: sizing zone task pool based on 2 zones
+16-Nov-2026 14:41:50.700 general: info: set up managed keys zone for view _default, file 'managed-keys.bind'
+16-Nov-2026 14:41:50.704 general: info: configuring command channel from '/etc/bind/rndc.key'
+16-Nov-2026 14:41:50.704 config: error: open: /etc/bind/rndc.key: permission denied
+16-Nov-2026 14:41:50.704 general: notice: command channel listening on 127.0.0.1#953
+19-Nov-2026 11:07:46.402 general: notice: starting BIND 9.18.49-1~deb12u3-Debian (Extended Support Version) <id:>
+19-Nov-2026 11:07:46.407 general: notice: running on Linux x86_64 7.0.0-38-generic #38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2
+19-Nov-2026 11:07:46.407 general: notice: built with  '--build=x86_64-linux-gnu' '--prefix=/usr' '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--sysconfdir=/etc' '--localstatedir=/var' '--disable-option-checking' '--disable-silent-rules' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--runstatedir=/run' '--disable-maintainer-mode' '--disable-dependency-tracking' '--libdir=/usr/lib/x86_64-linux-gnu' '--sysconfdir=/etc/bind' '--with-python=python3' '--localstatedir=/' '--enable-threads' '--enable-largefile' '--with-libtool' '--enable-shared' '--disable-static' '--with-gost=no' '--with-openssl=/usr' '--with-gssapi=yes' '--with-libidn2' '--with-json-c' '--with-lmdb=/usr' '--with-gnu-ld' '--with-maxminddb' '--with-atf=no' '--enable-ipv6' '--enable-rrl' '--enable-filter-aaaa' '--disable-native-pkcs11' '--enable-dnstap' 'build_alias=x86_64-linux-gnu' 'CFLAGS=-g -O2 -ffile-prefix-map=/build/reproducible-path/bind9-9.18.49=. -fstack-protector-strong -Wformat -Werror=format-security -fno-strict-aliasing -fno-delete-null-pointer-checks -DNO_VERSION_DATE -DDIG_SIGCHASE' 'LDFLAGS=-Wl,-z,relro -Wl,-z,now' 'CPPFLAGS=-Wdate-time -D_FORTIFY_SOURCE=2'
+19-Nov-2026 11:07:46.407 general: notice: running as: named -4 -c testbed/named.conf.tld -L testbed/logs/named-tld.log
+19-Nov-2026 11:07:46.407 general: notice: compiled by GCC 12.2.0
+19-Nov-2026 11:07:46.407 general: notice: compiled with OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+19-Nov-2026 11:07:46.407 general: notice: linked to OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+19-Nov-2026 11:07:46.407 general: notice: compiled with libuv version: 1.44.2
+19-Nov-2026 11:07:46.407 general: notice: linked to libuv version: 1.44.2
+19-Nov-2026 11:07:46.407 general: notice: compiled with libxml2 version: 2.9.14
+19-Nov-2026 11:07:46.407 general: notice: linked to libxml2 version: 20914
+19-Nov-2026 11:07:46.407 general: notice: compiled with json-c version: 0.16
+19-Nov-2026 11:07:46.407 general: notice: linked to json-c version: 0.16
+19-Nov-2026 11:07:46.407 general: notice: compiled with zlib version: 1.2.13
+19-Nov-2026 11:07:46.407 general: notice: linked to zlib version: 1.2.13
+19-Nov-2026 11:07:46.407 general: notice: ----------------------------------------------------
+19-Nov-2026 11:07:46.407 general: notice: BIND 9 is maintained by Internet Systems Consortium,
+19-Nov-2026 11:07:46.407 general: notice: Inc. (ISC), a non-profit 501(c)(3) public-benefit 
+19-Nov-2026 11:07:46.407 general: notice: corporation.  Support and training for BIND 9 are 
+19-Nov-2026 11:07:46.407 general: notice: available at https://www.isc.org/support
+19-Nov-2026 11:07:46.407 general: notice: ----------------------------------------------------
+19-Nov-2026 11:07:46.407 general: info: found 20 CPUs, using 20 worker threads
+19-Nov-2026 11:07:46.407 general: info: using 20 UDP listeners per interface
+19-Nov-2026 11:07:46.451 general: notice: DNSSEC algorithms: RSASHA1 NSEC3RSASHA1 RSASHA256 RSASHA512 ECDSAP256SHA256 ECDSAP384SHA384 ED25519 ED448
+19-Nov-2026 11:07:46.451 general: notice: DS algorithms: SHA-1 SHA-256 SHA-384
+19-Nov-2026 11:07:46.451 general: notice: HMAC algorithms: HMAC-MD5 HMAC-SHA1 HMAC-SHA224 HMAC-SHA256 HMAC-SHA384 HMAC-SHA512
+19-Nov-2026 11:07:46.451 general: notice: TKEY mode 2 support (Diffie-Hellman): yes
+19-Nov-2026 11:07:46.451 general: notice: TKEY mode 3 support (GSS-API): yes
+19-Nov-2026 11:07:46.454 general: info: the initial working directory is '/workspace'
+19-Nov-2026 11:07:46.454 general: info: loading configuration from '/workspace/testbed/named.conf.tld'
+19-Nov-2026 11:07:46.457 general: info: the working directory is now '/workspace/testbed'
+19-Nov-2026 11:07:46.457 general: info: reading built-in trust anchors from file '/etc/bind/bind.keys'
+19-Nov-2026 11:07:46.457 general: info: looking for GeoIP2 databases in '/usr/share/GeoIP'
+19-Nov-2026 11:07:46.457 general: info: using default UDP/IPv4 port range: [32768, 60999]
+19-Nov-2026 11:07:46.458 network: info: listening on IPv4 interface tld-eth0, 10.0.1.2#53
+19-Nov-2026 11:07:46.467 general: info: generating session key for dynamic DNS
+19-Nov-2026 11:07:46.468 general: info: sizing zone task pool based on 2 zones
+19-Nov-2026 11:07:46.471 general: info: set up managed keys zone for view _default, file 'managed-keys.bind'
+19-Nov-2026 11:07:46.476 general: info: configuring command channel from '/etc/bind/rndc.key'
+19-Nov-2026 11:07:46.476 config: error: open: /etc/bind/rndc.key: permission denied
+19-Nov-2026 11:07:46.476 general: notice: command channel listening on 127.0.0.1#953
+23-Nov-2026 13:56:37.771 general: notice: starting BIND 9.18.49-1~deb12u3-Debian (Extended Support Version) <id:>
+23-Nov-2026 13:56:37.776 general: notice: running on Linux x86_64 7.0.0-43-generic #43~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 31 06:52:47 UTC 2
+23-Nov-2026 13:56:37.776 general: notice: built with  '--build=x86_64-linux-gnu' '--prefix=/usr' '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--sysconfdir=/etc' '--localstatedir=/var' '--disable-option-checking' '--disable-silent-rules' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--runstatedir=/run' '--disable-maintainer-mode' '--disable-dependency-tracking' '--libdir=/usr/lib/x86_64-linux-gnu' '--sysconfdir=/etc/bind' '--with-python=python3' '--localstatedir=/' '--enable-threads' '--enable-largefile' '--with-libtool' '--enable-shared' '--disable-static' '--with-gost=no' '--with-openssl=/usr' '--with-gssapi=yes' '--with-libidn2' '--with-json-c' '--with-lmdb=/usr' '--with-gnu-ld' '--with-maxminddb' '--with-atf=no' '--enable-ipv6' '--enable-rrl' '--enable-filter-aaaa' '--disable-native-pkcs11' '--enable-dnstap' 'build_alias=x86_64-linux-gnu' 'CFLAGS=-g -O2 -ffile-prefix-map=/build/reproducible-path/bind9-9.18.49=. -fstack-protector-strong -Wformat -Werror=format-security -fno-strict-aliasing -fno-delete-null-pointer-checks -DNO_VERSION_DATE -DDIG_SIGCHASE' 'LDFLAGS=-Wl,-z,relro -Wl,-z,now' 'CPPFLAGS=-Wdate-time -D_FORTIFY_SOURCE=2'
+23-Nov-2026 13:56:37.776 general: notice: running as: named -4 -c testbed/named.conf.tld -L testbed/logs/named-tld.log
+23-Nov-2026 13:56:37.776 general: notice: compiled by GCC 12.2.0
+23-Nov-2026 13:56:37.776 general: notice: compiled with OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+23-Nov-2026 13:56:37.776 general: notice: linked to OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+23-Nov-2026 13:56:37.776 general: notice: compiled with libuv version: 1.44.2
+23-Nov-2026 13:56:37.777 general: notice: linked to libuv version: 1.44.2
+23-Nov-2026 13:56:37.777 general: notice: compiled with libxml2 version: 2.9.14
+23-Nov-2026 13:56:37.777 general: notice: linked to libxml2 version: 20914
+23-Nov-2026 13:56:37.777 general: notice: compiled with json-c version: 0.16
+23-Nov-2026 13:56:37.777 general: notice: linked to json-c version: 0.16
+23-Nov-2026 13:56:37.777 general: notice: compiled with zlib version: 1.2.13
+23-Nov-2026 13:56:37.777 general: notice: linked to zlib version: 1.2.13
+23-Nov-2026 13:56:37.777 general: notice: ----------------------------------------------------
+23-Nov-2026 13:56:37.777 general: notice: BIND 9 is maintained by Internet Systems Consortium,
+23-Nov-2026 13:56:37.777 general: notice: Inc. (ISC), a non-profit 501(c)(3) public-benefit 
+23-Nov-2026 13:56:37.777 general: notice: corporation.  Support and training for BIND 9 are 
+23-Nov-2026 13:56:37.777 general: notice: available at https://www.isc.org/support
+23-Nov-2026 13:56:37.777 general: notice: ----------------------------------------------------
+23-Nov-2026 13:56:37.777 general: info: found 14 CPUs, using 14 worker threads
+23-Nov-2026 13:56:37.777 general: info: using 14 UDP listeners per interface
+23-Nov-2026 13:56:37.789 general: notice: DNSSEC algorithms: RSASHA1 NSEC3RSASHA1 RSASHA256 RSASHA512 ECDSAP256SHA256 ECDSAP384SHA384 ED25519 ED448
+23-Nov-2026 13:56:37.789 general: notice: DS algorithms: SHA-1 SHA-256 SHA-384
+23-Nov-2026 13:56:37.789 general: notice: HMAC algorithms: HMAC-MD5 HMAC-SHA1 HMAC-SHA224 HMAC-SHA256 HMAC-SHA384 HMAC-SHA512
+23-Nov-2026 13:56:37.789 general: notice: TKEY mode 2 support (Diffie-Hellman): yes
+23-Nov-2026 13:56:37.789 general: notice: TKEY mode 3 support (GSS-API): yes
+23-Nov-2026 13:56:37.791 general: info: the initial working directory is '/workspace'
+23-Nov-2026 13:56:37.791 general: info: loading configuration from '/workspace/testbed/named.conf.tld'
+23-Nov-2026 13:56:37.795 general: info: the working directory is now '/workspace/testbed'
+23-Nov-2026 13:56:37.795 general: info: reading built-in trust anchors from file '/etc/bind/bind.keys'
+23-Nov-2026 13:56:37.796 general: info: looking for GeoIP2 databases in '/usr/share/GeoIP'
+23-Nov-2026 13:56:37.796 general: info: using default UDP/IPv4 port range: [32768, 60999]
+23-Nov-2026 13:56:37.796 network: info: listening on IPv4 interface tld-eth0, 10.0.1.2#53
+23-Nov-2026 13:56:37.819 general: info: generating session key for dynamic DNS
+23-Nov-2026 13:56:37.820 general: info: sizing zone task pool based on 2 zones
+23-Nov-2026 13:56:37.824 general: info: set up managed keys zone for view _default, file 'managed-keys.bind'
+23-Nov-2026 13:56:37.828 general: info: configuring command channel from '/etc/bind/rndc.key'
+23-Nov-2026 13:56:37.828 config: error: open: /etc/bind/rndc.key: permission denied
+23-Nov-2026 13:56:37.829 general: notice: command channel listening on 127.0.0.1#953
+23-Nov-2026 14:55:15.694 general: notice: starting BIND 9.18.49-1~deb12u3-Debian (Extended Support Version) <id:>
+23-Nov-2026 14:55:15.699 general: notice: running on Linux x86_64 7.0.0-43-generic #43~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 31 06:52:47 UTC 2
+23-Nov-2026 14:55:15.699 general: notice: built with  '--build=x86_64-linux-gnu' '--prefix=/usr' '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--sysconfdir=/etc' '--localstatedir=/var' '--disable-option-checking' '--disable-silent-rules' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--runstatedir=/run' '--disable-maintainer-mode' '--disable-dependency-tracking' '--libdir=/usr/lib/x86_64-linux-gnu' '--sysconfdir=/etc/bind' '--with-python=python3' '--localstatedir=/' '--enable-threads' '--enable-largefile' '--with-libtool' '--enable-shared' '--disable-static' '--with-gost=no' '--with-openssl=/usr' '--with-gssapi=yes' '--with-libidn2' '--with-json-c' '--with-lmdb=/usr' '--with-gnu-ld' '--with-maxminddb' '--with-atf=no' '--enable-ipv6' '--enable-rrl' '--enable-filter-aaaa' '--disable-native-pkcs11' '--enable-dnstap' 'build_alias=x86_64-linux-gnu' 'CFLAGS=-g -O2 -ffile-prefix-map=/build/reproducible-path/bind9-9.18.49=. -fstack-protector-strong -Wformat -Werror=format-security -fno-strict-aliasing -fno-delete-null-pointer-checks -DNO_VERSION_DATE -DDIG_SIGCHASE' 'LDFLAGS=-Wl,-z,relro -Wl,-z,now' 'CPPFLAGS=-Wdate-time -D_FORTIFY_SOURCE=2'
+23-Nov-2026 14:55:15.699 general: notice: running as: named -4 -c testbed/named.conf.tld -L testbed/logs/named-tld.log
+23-Nov-2026 14:55:15.699 general: notice: compiled by GCC 12.2.0
+23-Nov-2026 14:55:15.699 general: notice: compiled with OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+23-Nov-2026 14:55:15.699 general: notice: linked to OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+23-Nov-2026 14:55:15.699 general: notice: compiled with libuv version: 1.44.2
+23-Nov-2026 14:55:15.699 general: notice: linked to libuv version: 1.44.2
+23-Nov-2026 14:55:15.699 general: notice: compiled with libxml2 version: 2.9.14
+23-Nov-2026 14:55:15.699 general: notice: linked to libxml2 version: 20914
+23-Nov-2026 14:55:15.699 general: notice: compiled with json-c version: 0.16
+23-Nov-2026 14:55:15.699 general: notice: linked to json-c version: 0.16
+23-Nov-2026 14:55:15.699 general: notice: compiled with zlib version: 1.2.13
+23-Nov-2026 14:55:15.699 general: notice: linked to zlib version: 1.2.13
+23-Nov-2026 14:55:15.699 general: notice: ----------------------------------------------------
+23-Nov-2026 14:55:15.699 general: notice: BIND 9 is maintained by Internet Systems Consortium,
+23-Nov-2026 14:55:15.699 general: notice: Inc. (ISC), a non-profit 501(c)(3) public-benefit 
+23-Nov-2026 14:55:15.699 general: notice: corporation.  Support and training for BIND 9 are 
+23-Nov-2026 14:55:15.699 general: notice: available at https://www.isc.org/support
+23-Nov-2026 14:55:15.699 general: notice: ----------------------------------------------------
+23-Nov-2026 14:55:15.699 general: info: found 14 CPUs, using 14 worker threads
+23-Nov-2026 14:55:15.699 general: info: using 14 UDP listeners per interface
+23-Nov-2026 14:55:15.715 general: notice: DNSSEC algorithms: RSASHA1 NSEC3RSASHA1 RSASHA256 RSASHA512 ECDSAP256SHA256 ECDSAP384SHA384 ED25519 ED448
+23-Nov-2026 14:55:15.715 general: notice: DS algorithms: SHA-1 SHA-256 SHA-384
+23-Nov-2026 14:55:15.715 general: notice: HMAC algorithms: HMAC-MD5 HMAC-SHA1 HMAC-SHA224 HMAC-SHA256 HMAC-SHA384 HMAC-SHA512
+23-Nov-2026 14:55:15.715 general: notice: TKEY mode 2 support (Diffie-Hellman): yes
+23-Nov-2026 14:55:15.715 general: notice: TKEY mode 3 support (GSS-API): yes
+23-Nov-2026 14:55:15.717 general: info: the initial working directory is '/workspace'
+23-Nov-2026 14:55:15.717 general: info: loading configuration from '/workspace/testbed/named.conf.tld'
+23-Nov-2026 14:55:15.720 general: info: the working directory is now '/workspace/testbed'
+23-Nov-2026 14:55:15.720 general: info: reading built-in trust anchors from file '/etc/bind/bind.keys'
+23-Nov-2026 14:55:15.721 general: info: looking for GeoIP2 databases in '/usr/share/GeoIP'
+23-Nov-2026 14:55:15.721 general: info: using default UDP/IPv4 port range: [32768, 60999]
+23-Nov-2026 14:55:15.721 network: info: listening on IPv4 interface tld-eth0, 10.0.1.2#53
+23-Nov-2026 14:55:15.742 general: info: generating session key for dynamic DNS
+23-Nov-2026 14:55:15.742 general: info: sizing zone task pool based on 2 zones
+23-Nov-2026 14:55:15.747 general: info: set up managed keys zone for view _default, file 'managed-keys.bind'
+23-Nov-2026 14:55:15.750 general: info: configuring command channel from '/etc/bind/rndc.key'
+23-Nov-2026 14:55:15.750 config: error: open: /etc/bind/rndc.key: permission denied
+23-Nov-2026 14:55:15.751 general: notice: command channel listening on 127.0.0.1#953
+23-Nov-2026 15:30:30.821 general: notice: starting BIND 9.18.49-1~deb12u3-Debian (Extended Support Version) <id:>
+23-Nov-2026 15:30:30.826 general: notice: running on Linux x86_64 7.0.0-43-generic #43~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Sat Oct 31 06:52:47 UTC 2
+23-Nov-2026 15:30:30.826 general: notice: built with  '--build=x86_64-linux-gnu' '--prefix=/usr' '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--sysconfdir=/etc' '--localstatedir=/var' '--disable-option-checking' '--disable-silent-rules' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--runstatedir=/run' '--disable-maintainer-mode' '--disable-dependency-tracking' '--libdir=/usr/lib/x86_64-linux-gnu' '--sysconfdir=/etc/bind' '--with-python=python3' '--localstatedir=/' '--enable-threads' '--enable-largefile' '--with-libtool' '--enable-shared' '--disable-static' '--with-gost=no' '--with-openssl=/usr' '--with-gssapi=yes' '--with-libidn2' '--with-json-c' '--with-lmdb=/usr' '--with-gnu-ld' '--with-maxminddb' '--with-atf=no' '--enable-ipv6' '--enable-rrl' '--enable-filter-aaaa' '--disable-native-pkcs11' '--enable-dnstap' 'build_alias=x86_64-linux-gnu' 'CFLAGS=-g -O2 -ffile-prefix-map=/build/reproducible-path/bind9-9.18.49=. -fstack-protector-strong -Wformat -Werror=format-security -fno-strict-aliasing -fno-delete-null-pointer-checks -DNO_VERSION_DATE -DDIG_SIGCHASE' 'LDFLAGS=-Wl,-z,relro -Wl,-z,now' 'CPPFLAGS=-Wdate-time -D_FORTIFY_SOURCE=2'
+23-Nov-2026 15:30:30.826 general: notice: running as: named -4 -c testbed/named.conf.tld -L testbed/logs/named-tld.log
+23-Nov-2026 15:30:30.826 general: notice: compiled by GCC 12.2.0
+23-Nov-2026 15:30:30.826 general: notice: compiled with OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+23-Nov-2026 15:30:30.826 general: notice: linked to OpenSSL version: OpenSSL 3.0.22 25 Aug 2026
+23-Nov-2026 15:30:30.826 general: notice: compiled with libuv version: 1.44.2
+23-Nov-2026 15:30:30.826 general: notice: linked to libuv version: 1.44.2
+23-Nov-2026 15:30:30.826 general: notice: compiled with libxml2 version: 2.9.14
+23-Nov-2026 15:30:30.826 general: notice: linked to libxml2 version: 20914
+23-Nov-2026 15:30:30.826 general: notice: compiled with json-c version: 0.16
+23-Nov-2026 15:30:30.826 general: notice: linked to json-c version: 0.16
+23-Nov-2026 15:30:30.826 general: notice: compiled with zlib version: 1.2.13
+23-Nov-2026 15:30:30.826 general: notice: linked to zlib version: 1.2.13
+23-Nov-2026 15:30:30.826 general: notice: ----------------------------------------------------
+23-Nov-2026 15:30:30.826 general: notice: BIND 9 is maintained by Internet Systems Consortium,
+23-Nov-2026 15:30:30.826 general: notice: Inc. (ISC), a non-profit 501(c)(3) public-benefit 
+23-Nov-2026 15:30:30.826 general: notice: corporation.  Support and training for BIND 9 are 
+23-Nov-2026 15:30:30.826 general: notice: available at https://www.isc.org/support
+23-Nov-2026 15:30:30.826 general: notice: ----------------------------------------------------
+23-Nov-2026 15:30:30.826 general: info: found 14 CPUs, using 14 worker threads
+23-Nov-2026 15:30:30.826 general: info: using 14 UDP listeners per interface
+23-Nov-2026 15:30:30.839 general: notice: DNSSEC algorithms: RSASHA1 NSEC3RSASHA1 RSASHA256 RSASHA512 ECDSAP256SHA256 ECDSAP384SHA384 ED25519 ED448
+23-Nov-2026 15:30:30.839 general: notice: DS algorithms: SHA-1 SHA-256 SHA-384
+23-Nov-2026 15:30:30.839 general: notice: HMAC algorithms: HMAC-MD5 HMAC-SHA1 HMAC-SHA224 HMAC-SHA256 HMAC-SHA384 HMAC-SHA512
+23-Nov-2026 15:30:30.839 general: notice: TKEY mode 2 support (Diffie-Hellman): yes
+23-Nov-2026 15:30:30.839 general: notice: TKEY mode 3 support (GSS-API): yes
+23-Nov-2026 15:30:30.841 general: info: the initial working directory is '/workspace'
+23-Nov-2026 15:30:30.841 general: info: loading configuration from '/workspace/testbed/named.conf.tld'
+23-Nov-2026 15:30:30.845 general: info: the working directory is now '/workspace/testbed'
+23-Nov-2026 15:30:30.845 general: info: reading built-in trust anchors from file '/etc/bind/bind.keys'
+23-Nov-2026 15:30:30.845 general: info: looking for GeoIP2 databases in '/usr/share/GeoIP'
+23-Nov-2026 15:30:30.845 general: info: using default UDP/IPv4 port range: [32768, 60999]
+23-Nov-2026 15:30:30.846 network: info: listening on IPv4 interface tld-eth0, 10.0.1.2#53
+23-Nov-2026 15:30:30.865 general: info: generating session key for dynamic DNS
+23-Nov-2026 15:30:30.866 general: info: sizing zone task pool based on 2 zones
+23-Nov-2026 15:30:30.870 general: info: set up managed keys zone for view _default, file 'managed-keys.bind'
+23-Nov-2026 15:30:30.874 general: info: configuring command channel from '/etc/bind/rndc.key'
+23-Nov-2026 15:30:30.874 config: error: open: /etc/bind/rndc.key: permission denied
+23-Nov-2026 15:30:30.874 general: notice: command channel listening on 127.0.0.1#953
